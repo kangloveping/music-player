@@ -1,0 +1,311 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+}
+/* 添加网页背景 */
+.warp{
+    width: 100%;
+    height: 100%;
+    background: url("../images/bg.jpg") no-repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-size: 100% 100%;
+
+}
+/* 播放器主体 */
+.play-container{
+    width: 800px;
+    height: 544px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -400px;
+    margin-top: -272px;
+}
+/* 1播放器头部 */
+.play-container .top{
+    width: 100%;
+    height: 60px;
+    background-color: #1eacda;
+    z-index: 11;
+    position: relative;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+/* 1.1播放器图标 */
+.top i{
+    display: inline-block;
+    width: 180px;
+    height: 60px;
+    background: url("../images/logo.png")15px -5px no-repeat;
+}
+/* 1.2搜索区 */
+.play-container .search{
+    margin-right: 23px;
+    margin-top: 15px;
+    width: 250px;
+    height: 34px;
+    border-radius: 17px;
+    border: 0px;
+    float: right;
+    background: url("../images/zoom.png") 215px center no-repeat
+    rgba(255, 255, 255, 0.45);
+    /* 文字缩进 */
+    text-indent: 15px;
+    /* 隐藏输入框外轮廓 */
+    outline: none;
+}
+/* 2播放器中部 */
+.center{
+    width: 100%;
+    height: 435px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+/* 2.1歌曲列表 */
+.center .m-list{
+    box-sizing: border-box;
+    width: 200px;
+    height: 435px;
+    /* background-color: rgb(77, 170, 40); */
+    padding: 10px;
+}
+.m-list ul{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.m-list ul::-webkit-scrollbar{
+    display: none;
+}
+.m-list li{
+    height: 40px;
+    width: 580px;
+    font-size: 12px;
+    color: #333;
+    display: flex;
+    /* flex-wrap 属性规定flex弹性容器可以拆成多行 */
+    flex-wrap: wrap;
+    align-items: center;
+    padding-left: 10px;
+
+}
+.m-list li:nth-child(odd) {
+  background-color: rgba(240, 240, 240, 0.3);
+}
+/* 播放按钮图标 */
+.m-list a{
+    width: 17px;
+    height: 17px;
+    box-sizing: border-box;
+    display: block;
+    background: url("../images/play.png")no-repeat;
+    background-size: 100%;
+    margin-right: 5px;
+}
+/* 歌曲名 */
+.m-list b{
+    width: 120px;
+    font-weight: 550;
+    overflow: hidden;
+    /* 文字超出用省略号代替 */
+    text-overflow: ellipsis;
+    /* 文本不换行 */
+    white-space: nowrap;
+}
+/* MV播放图标 */
+.m-list li span {
+  width: 23px;
+  height: 17px;
+  margin-right: 50px;
+}
+.m-list i{
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* 光标修改 */
+    cursor: pointer;
+    background: url("../images/table.png")0 -48px no-repeat;
+}
+/* 分割竖线 */
+.m-list img{
+    float: right;
+    position: absolute;
+    left: 199px;
+    top: 60px;
+}
+/* 封面区域 */
+.m-info{
+    width: 400px;
+    height: 435px;
+    position: absolute;
+    left: 200px;
+    top: 60px;
+    /* background-color: rgb(170, 161, 30); */
+}
+/* 设置封面动画 */
+/* 先定义一个旋转动画 */
+@keyframes Rotate {
+  from {
+    transform: rotateZ(0);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+/* 动画的类名 */
+.autoRotate {
+  animation-name: Rotate;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+  animation-timing-function: linear;
+  animation-duration: 5s;
+}
+/* 监听是否播放音乐 */
+.m-info.playing .disc,
+.m-info.playing .info{
+    /* 启动旋转动画 */
+  animation-play-state: running;
+}
+
+.m-info .bar{
+    position: absolute;
+    left: 200px;
+    top: -10px;
+    z-index: 10;
+    transform: rotate(-25deg);
+    transform-origin: 12px 12px;
+    transition: 1s;
+}
+/* 播放杆位置改变 */
+.m-info.playing .bar{
+    transform: rotate(0deg);
+}
+.m-info .disc{
+    position: absolute;
+    left: 73px;
+    top: 60px;
+    z-index: 9;
+}
+.m-info .info{
+    position: absolute;
+    left: 125px;
+    top: 112px;
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    z-index: 8;
+}
+.lyric{
+    position: absolute;
+    width: 340px;
+    height: 60px;
+    /* background-color: #fff; */
+    top: 330px;
+    left: 30px;
+    font-size: 15px;
+    line-height: 25px;
+    text-align: center;
+    color: #777;
+}
+.lyric .lyric-c{
+    color: #1eacda;
+    font-size: 18px;
+}
+
+/* 2.2评论区 */
+.m-comments{
+    box-sizing: border-box;
+    width: 200px;
+    height: 435px;
+    position: absolute;
+    left: 600px;
+    top: 60px;
+    padding: 25px 10px;
+    /* background-color: rgb(65, 93, 170); */
+}
+/* 标题 */
+.m-comments .title {
+    position: absolute;
+    top: 10px;
+}
+/* 评论列表 */
+.m-comments .comment_list {
+  overflow: auto;
+  height: 410px;
+}
+/* 隐藏滚动条 */
+.comment_list::-webkit-scrollbar {
+  display: none;
+}
+.comment_list dl {
+  padding-top: 10px;
+  padding-left: 55px;
+  position: relative;
+  margin-bottom: 20px;
+}
+.comment_list dt {
+  position: absolute;
+  left: 4px;
+  top: 10px;
+}
+/* 头像 */
+.comment_list img{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+.comment_list dd{
+    font-size: 12px;
+}
+.comment_list .c-name{
+    font-weight: bold;
+    color: #333;
+    line-height: 18px;
+}
+.m-comments .right_line{
+    position: absolute;
+    top: 0;
+    left: -1px;
+}
+/* 播放器控制条 */
+.control{
+    width: 100%;
+    height: 50px;
+    background-color: #f1f3f4;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.audio audio{
+    width: 100%;
+    height: 40px;
+    margin-top: 5px;
+    outline: none;
+    background-color: #f1f3f4;
+}
+.video video {
+  position: fixed;
+  width: 800px;
+  height: 546px;
+  left: 50%;
+  top: 50%;
+  margin-top: -273px;
+  transform: translateX(-50%);
+  z-index: 990;
+}
+.video .mask{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 900;
+    background-color: rgba(0,0,0,0.8);
+}

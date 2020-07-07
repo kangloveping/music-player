@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网易云播放器</title>
+    <link rel="stylesheet" href="./css/music.css">
+</head>
+
+<body>
+    <div class="warp" id="player">
+        <div class="play-container">
+            <div class="top">
+                <i></i>
+                <input v-model="query" @keyup.enter="searchMusic" type="text" class="search">
+            </div>
+            <div class="center">
+                <div class="m-list">
+                    <ul>
+                        <li v-for="songs in musicList" v-show="isActive" style="display: none;">
+                            <a @click="playMusic(songs.id)" href="javascript:;"></a>
+                            <b> {{ songs.name }} </b>
+                            <span v-if="songs.mvid!=0" @click="playMv(songs.mvid)">
+                                <i></i>
+                            </span>
+                        </li>
+                    </ul>
+                    <img src="./images/line.png" alt="">
+                </div>
+                <div class="m-info" :class="{playing:isPlaying}">
+                    <img class="bar" src="./images/player_bar.png" alt="">
+                    <img class="disc autoRotate" src="./images/disc.png" alt="">
+                    <!-- 若封面地址为空，则显示默认图片 -->
+                    <img class="info autoRotate" :src=" musicInfo ==''?  './images/cover.png':musicInfo" alt="">
+                    <div class="lyric" v-show="isLyric" style="display: none;">
+                        <p> {{ lyric_up }} </p>
+                        <p class="lyric-c">{{ lyric_c }}</p>
+                        <p> {{ lyric_un }} </p>
+                    </div>
+                </div>
+                <div class="m-comments">
+                    <h5 class='title'>热门留言</h5>
+                    <div class="comment_list">
+                        <dl v-for="item in hotComments" v-show="isActive" style="display: none;">
+                            <dt><img :src="item.user.avatarUrl" alt=""></dt>
+                            <dd class="c-name"> {{ item.user.nickname }} </dd>
+                            <dd class="c-detail"> {{ item.content }} </dd>
+                        </dl>
+                    </div>
+                    <img src="images/line.png" class="right_line">
+                </div>
+            </div>
+            <div class="control">
+                <div class="audio">
+                    <audio :src="musicUrl" @play="play" @pause="pause" @timeupdate="updateTime" class="audio1" controls
+                        autoplay loop></audio>
+                </div>
+                <div class="video" v-show="isShow" style="display: none;">
+                    <video :src="mvUrl" class="video1" controls="controls"></video>
+                    <div class="mask" @click="hide"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 开发环境版本v -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 官网提供的 axios 在线地址 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/music.js"></script>
+</body>
+
+</html>
